@@ -26,12 +26,52 @@ https://en.wikipedia.org/wiki/Lucas%E2%80%93Carmichael_number
 +1
 588,456  6, 8, 18, 24, 44
 
+
+
+*** Sample output:
+
+-----------------------   -----------------   --------------------------
+Lucas-Carmichael Number   Num Prime Factors   Prime Factors
+-----------------------   -----------------   --------------------------
+                   399             3           3, 7, 19,
+                   935             3           5, 11, 17,
+                 2,015             3           5, 13, 31,
+                 2,915             3           5, 11, 53,
+                 4,991             3           7, 23, 31,
+                 5,719             3           7, 19, 43,
+                 7,055             3           5, 17, 83,
+                 8,855             4           5, 7, 11, 23,
+                12,719             3           7, 23, 79,
+                18,095             4           5, 7, 11, 47,
+                20,705             3           5, 41, 101,
+                20,999             3           11, 23, 83,
+                22,847             3           11, 31, 67,
+                29,315             4           5, 11, 13, 41,
+                31,535             4           5, 7, 17, 53,
+                46,079             3           11, 59, 71,
+                51,359             4           7, 11, 23, 29,
+                60,059             3           19, 29, 109,
+                63,503             3           11, 23, 251,
+                67,199             3           11, 41, 149,
+                73,535             4           5, 7, 11, 191,
+                76,751             3           23, 47, 71,
+                80,189             3           17, 53, 89,
+                81,719             4           11, 17, 19, 23,
+                88,559             3           19, 59, 79,
+                90,287             3           17, 47, 113,
+
+26 Lucas-Carmichael Numbers found up to 100,000.
+
 */
 
 import java.util.ArrayList;
 
 public class LucasCarmichaelNumbers
 {
+   // To go higher than this, I need more primes in my PRIME_NUMBERS array:
+   public static final int MAX_VALUE = 100_000;
+
+
    public static long[] PRIME_NUMBERS = {
                3,    5,    7,   11,   13,   17,   19,   23,   29,   31,   37,   41,   43,   47,   53,   59,   61,   67,   71,   73,
               79,   83,   89,   97,  101,  103,  107,  109,  113,  127,  131,  137,  139,  149,  151,  157,  163,  167,  173,  179,
@@ -205,14 +245,26 @@ public class LucasCarmichaelNumbers
       System.out.println (isLucasCarmichaelNumber (30819) );  // No
       */
 
-      for (int k = 3; k < 100_000; k++)
+      System.out.println ("-----------------------   -----------------   --------------------------");
+      System.out.println ("Lucas-Carmichael Number   Num Prime Factors   Prime Factors");
+      System.out.println ("-----------------------   -----------------   --------------------------");
+
+
+      int count = 0;
+      for (int k = 3; k < MAX_VALUE; k++)
       {
          if (isLucasCarmichaelNumber (k) == true)
          {
-            System.out.println (k + " - " + getPrimeFactorsCSV () );
+            System.out.println (String.format ("%,22d", k)                    +
+                                String.format ("%14d",  primeFactors.size() ) +
+                                "           " + getPrimeFactorsCSV () );
+            count++;
          }
       }
 
+      System.out.println ();
+      System.out.println (count + " Lucas-Carmichael Numbers found up to " +
+                          String.format ("%,d", MAX_VALUE) + ".");
 
    }
 }
